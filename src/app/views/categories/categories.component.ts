@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/model/Category';
+import { Task } from 'src/app/model/Task';
 import { DataHandlerService } from 'src/app/service/data-handler.service';
 
 @Component({
@@ -15,5 +16,9 @@ export class CategoriesComponent implements OnInit {
 	ngOnInit(): void {
 		this.categories = this.dataHandler.getCategories();
 		console.log('@categories ', this.categories);
+	}
+
+	showTasksByCategory(category: Category) {
+		this.dataHandler.getTaskByCategory(category);
 	}
 }

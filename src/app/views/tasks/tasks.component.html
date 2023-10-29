@@ -8,58 +8,48 @@
 			</div>
 			<div class="card-body px-0 pb-2">
 				<div class="table-responsive p-0">
-					<table class="table align-items-center mb-0">
-						<thead>
-							<tr>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Название
-								</th>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-									Статус</th>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-									Приоритет</th>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-									Категория</th>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-									Дата</th>
-								<th class="text-secondary opacity-7"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let task of tasks" [class.completed]="task.completed">
-								<td>
-									<div class="d-flex px-2 py-1">
-										<div class="d-flex flex-column justify-content-center">
-											<h6 class="mb-0 text-sm">{{task.title}}</h6>
-											<p class="text-xs text-secondary mb-0">описание</p>
-										</div>
-									</div>
-								</td>
-								<td>
-									<div class="form-check form-switch ps-0 is-filled">
-										<input type="checkbox" class="form-check-input ms-auto" name="completed"
-											[checked]="task.completed" (click)="toggleTaskCompleted(task)">
-									</div>
-								</td>
-								<td class="align-middle text-sm">
-									<span class="badge badge-sm bg-gradient-success">{{task.priority?.title}}</span>
-								</td>
-								<td class="align-middle">
-									<span
-										class="text-secondary text-xs font-weight-bold">{{task.category?.title}}</span>
-								</td>
-								<td class="align-middle">
-									<span class="text-secondary text-xs font-weight-bold">
-										{{task.date | date:'shortDate'}}
-									</span>
-								</td>
-								<td class="align-middle">
-									<a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-										data-original-title="Edit user">
-										Edit
-									</a>
-								</td>
-							</tr>
-						</tbody>
+					<table [dataSource]="dataSource" mat-table>
+						<!--Цвет приоритета-->
+						<ng-container matColumnDef="color">
+							<th *matHeaderCellDef mat-header-cell></th>
+							<td *matCellDef="let task" [style.background-color]="getPriorityColor(task)" mat-cell></td>
+						</ng-container>
+						<!--Нумерация-->
+						<ng-container matColumnDef="id">
+							<th *matHeaderCellDef mat-header-cell></th>
+							<td *matCellDef="let index = index" mat-cell>{{index+1}}</td>
+						</ng-container>
+						<!--Название задачи-->
+						<ng-container matColumnDef="title">
+							<th *matHeaderCellDef mat-header-cell>Название</th>
+							<td *matCellDef="let task" mat-cell [class.completed]="task.completed">
+								{{task.title}}
+							</td>
+						</ng-container>
+						<!--Дата выполнения-->
+						<ng-container matColumnDef="date">
+							<th *matHeaderCellDef mat-header-cell>Срок</th>
+							<td *matCellDef="let task" mat-cell>
+								{{task.date | date:'medium'}}
+							</td>
+						</ng-container>
+						<!--Приоритет-->
+						<ng-container matColumnDef="priority">
+							<th *matHeaderCellDef mat-header-cell>Приоритет</th>
+							<td *matCellDef="let task" mat-cell>
+								{{task.priority?.title}}
+							</td>
+						</ng-container>
+						<!--Категория-->
+						<ng-container matColumnDef="category">
+							<th *matHeaderCellDef mat-header-cell>Категория</th>
+							<td *matCellDef="let task" mat-cell>
+								{{task.category?.title}}
+							</td>
+						</ng-container>
+
+						<tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+						<tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 					</table>
 				</div>
 			</div>

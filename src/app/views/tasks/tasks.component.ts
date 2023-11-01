@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -18,12 +18,13 @@ export class TasksComponent implements OnInit, AfterViewInit {
 	@ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+	@Input()
 	tasks!: Task[];
 
 	constructor(private dataHandler: DataHandlerService) { }
 
 	ngOnInit(): void {
-		this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
+		//this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
 		this.dataSource = new MatTableDataSource();
 		this.refreshTable();
 	}

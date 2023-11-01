@@ -5,7 +5,7 @@ export interface CommonDAO<T> { // <T> дженерик для обобщены�
 	// получить все значения
 	getAll(): Observable<T[]>;
 	// получить одно значение по id
-	get(id: number): Observable<T>;
+	get(id: number): Observable<T | undefined>;
 	// обновить значение
 	update(obj: T): Observable<T>;
 	// удалить значение

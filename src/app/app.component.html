@@ -11,7 +11,7 @@
 	</div>
 	<hr class="horizontal light mt-0 mb-2">
 	<!--Categories-->
-	<app-categories></app-categories>
+	<app-categories [categories]="categories"></app-categories>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 	<!-- Navbar -->
@@ -231,7 +231,7 @@
 			</div>
 		</div>
 		<!-- Tasks -->
-		<app-tasks></app-tasks>
+		<app-tasks [tasks]="tasks"></app-tasks>
 	</div>
 </main>
 <div class="fixed-plugin">

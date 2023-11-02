@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CategoryDAOArray } from '../data/dao/impl/CategoryDAOArray';
 import { TaskDAOArray } from '../data/dao/impl/TaskDAOArray';
-import { TestData } from '../data/TestData';
 import { Category } from '../model/Category';
+import { Priority } from '../model/Priority';
 import { Task } from '../model/Task';
 
 @Injectable({
@@ -24,5 +24,10 @@ export class DataHandlerService {
 	// все таски
 	getAllTasks(): Observable<Task[]> {
 		return this.taskDaoArray.getAll();
+	}
+
+	// выбранная категория
+	searchTasks(category: Category, searchText: string, status: boolean, priority: Priority): Observable<Task[]> {
+		return this.taskDaoArray.search(category, searchText, status, priority);
 	}
 }

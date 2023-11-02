@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 	categories!: Category[];
 
 	selectedCategory: Category | null = null;
+	selectedTask: Task | null = null;
 
 	constructor(private dataHandler: DataHandlerService) { }
 
@@ -34,5 +35,9 @@ export class AppComponent implements OnInit {
 		).subscribe((tasks) => {
 			this.tasks = tasks;
 		})
+	}
+
+	onSelectTask(task: Task) {
+		console.log(task);
 	}
 }

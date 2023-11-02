@@ -231,7 +231,7 @@
 			</div>
 		</div>
 		<!-- Tasks -->
-		<app-tasks [tasks]="tasks"></app-tasks>
+		<app-tasks (selectTask)="onSelectTask($event)" [tasks]="tasks"></app-tasks>
 	</div>
 </main>
 <div class="fixed-plugin">

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,6 +25,9 @@ export class TasksComponent implements OnInit, AfterViewInit {
 		this.refreshTable();
 	};
 
+	@Output()
+	selectTask = new EventEmitter<Task>()
+
 	constructor() { }
 
 	ngOnInit(): void {
@@ -39,6 +42,10 @@ export class TasksComponent implements OnInit, AfterViewInit {
 
 	toggleTaskCompleted(task: Task) {
 		task.completed = !task.completed;
+	}
+
+	onClickTask(task: Task) {
+		this.selectTask.emit(task);
 	}
 
 	public getPriorityColor(task: Task) {

@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Task } from 'src/app/model/Task';
-import { DataHandlerService } from 'src/app/service/data-handler.service';
 
 @Component({
 	selector: 'app-tasks',
@@ -18,10 +17,18 @@ export class TasksComponent implements OnInit, AfterViewInit {
 	@ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 	@ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-	@Input()
-	tasks!: Task[];
+	public tasks!: Task[];
 
-	constructor(private dataHandler: DataHandlerService) { }
+	@Input('tasks')
+	public set setTasks(tasks: Task[]) {
+		this.tasks = tasks;
+		this.refreshTable();
+	};
+
+	@Output()
+	selectTask = new EventEmitter<Task>()
+
+	constructor() { }
 
 	ngOnInit(): void {
 		//this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
@@ -37,6 +44,10 @@ export class TasksComponent implements OnInit, AfterViewInit {
 		task.completed = !task.completed;
 	}
 
+	onClickTask(task: Task) {
+		this.selectTask.emit(task);
+	}
+
 	public getPriorityColor(task: Task) {
 		if (task.priority && task.priority.color) {
 			return task.priority.color;
@@ -44,6 +55,8 @@ export class TasksComponent implements OnInit, AfterViewInit {
 	}
 
 	private refreshTable() {
+		if (!this.dataSource) return;
+
 		this.dataSource.data = this.tasks;
 		this.addTableObjects();
 		//@ts-ignore

@@ -12,7 +12,15 @@ export class TaskDAOArray implements TaskDAO {
 		status: boolean,
 		priority: Priority
 	): Observable<Task[]> {
-		throw new Error('Method not implemented.');
+		return of(this.searchTasks(category, searchText, status, priority))
+	}
+
+	searchTasks(category: Category, searchText: string, status: boolean, priority: Priority) {
+		let allTasks = TestData.tasks;
+		if (category != null) {
+			allTasks = allTasks.filter(task => task.category === category);
+		}
+		return allTasks;
 	}
 	getCompletedCountInCategory(category: Category): Observable<number> {
 		throw new Error('Method not implemented.');

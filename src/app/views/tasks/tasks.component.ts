@@ -56,7 +56,10 @@ export class TasksComponent implements OnInit, AfterViewInit {
 			}
 		);
 		dialogRef.afterClosed().subscribe(result => {
-
+			if (result as Task) {
+				this.selectTask.emit(task);
+				return;
+			}
 		});
 	}
 

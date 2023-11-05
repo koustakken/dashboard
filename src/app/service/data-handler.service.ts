@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryDAOArray } from '../data/dao/impl/CategoryDAOArray';
+import { PriorityDAOArray } from '../data/dao/impl/PriorityDAOArray';
 import { TaskDAOArray } from '../data/dao/impl/TaskDAOArray';
 import { Category } from '../model/Category';
 import { Priority } from '../model/Priority';
@@ -13,9 +14,14 @@ export class DataHandlerService {
 
 	private taskDaoArray = new TaskDAOArray();
 	private categoryDaoArray = new CategoryDAOArray();
+	private priorityDaoArray = new PriorityDAOArray();
 
 	constructor() {
 
+	}
+	// все приоритеты
+	getAllPriority(): Observable<Priority[]> {
+		return this.priorityDaoArray.getAll();
 	}
 	// все категории
 	getAllCategories(): Observable<Category[]> {

@@ -26,9 +26,11 @@ export class TasksComponent implements OnInit, AfterViewInit {
 		this.tasks = tasks;
 		this.refreshTable();
 	};
+	@Output()
+	deleteTask = new EventEmitter<Task>();
 
 	@Output()
-	selectTask = new EventEmitter<Task>()
+	selectTask = new EventEmitter<Task>();
 	public tasks!: Task[];
 
 	constructor(private dialog: MatDialog) { }
@@ -56,6 +58,10 @@ export class TasksComponent implements OnInit, AfterViewInit {
 			}
 		);
 		dialogRef.afterClosed().subscribe(result => {
+			if (result === 'delete') {
+				this.deleteTask.emit(task)
+				return;
+			}
 			if (result as Task) {
 				this.selectTask.emit(task);
 				return;

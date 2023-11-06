@@ -31,7 +31,7 @@
 						<ng-container matColumnDef="date">
 							<th *matHeaderCellDef mat-header-cell mat-sort-header>Срок</th>
 							<td *matCellDef="let task" mat-cell>
-								{{task.date | date:'medium'}}
+								{{task.date | taskDate}}
 							</td>
 						</ng-container>
 						<!--Приоритет-->

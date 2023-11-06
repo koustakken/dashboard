@@ -31,5 +31,7 @@
 	<button mat-raised-button color="primary" (click)="onConfirm()"
 		[disabled]="inputTitle.value.trim().length==0">Сохранить</button>
 	<button mat-raised-button (click)="onCancel()">Отмена</button>
+	<button mat-button *ngIf="!task.completed" (click)="complete()">Завершить задачу</button>
+	<button mat-button *ngIf="task.completed" (click)="activate()">Активировать задачу</button>
 	<button mat-button color="warn" (click)="delete()">Удалить задачу</button>
 </mat-dialog-actions>

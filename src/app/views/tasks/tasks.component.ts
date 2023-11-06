@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { EditTaskDialogComponent } from 'src/app/dialog/edit-task-dialog/edit-task-dialog.component';
+import { Category } from 'src/app/model/Category';
 import { Task } from 'src/app/model/Task';
 
 @Component({
@@ -33,6 +34,9 @@ export class TasksComponent implements OnInit, AfterViewInit {
 	@Output()
 	selectTask = new EventEmitter<Task>();
 	public tasks!: Task[];
+
+	@Output()
+	selectCategory = new EventEmitter<Category>();
 
 	constructor(private dialog: MatDialog) { }
 
@@ -92,6 +96,10 @@ export class TasksComponent implements OnInit, AfterViewInit {
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) this.deleteTask.emit(task);
 		})
+	}
+
+	onSelectCategory(category: Category) {
+		this.selectCategory.emit(category);
 	}
 
 	public getPriorityColor(task: Task): string {

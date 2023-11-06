@@ -43,7 +43,8 @@
 						<!--Категория-->
 						<ng-container matColumnDef="category">
 							<th *matHeaderCellDef mat-header-cell mat-sort-header>Категория</th>
-							<td *matCellDef="let task" mat-cell>
+							<td *matCellDef="let task" mat-cell
+								(click)="!task.completed && task.category && onSelectCategory(task.category)">
 								{{task.category?.title}}
 							</td>
 						</ng-container>

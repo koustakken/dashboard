@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { EditTaskDialogComponent } from 'src/app/dialog/edit-task-dialog/edit-task-dialog.component';
 import { Task } from 'src/app/model/Task';
 
@@ -12,7 +13,7 @@ import { Task } from 'src/app/model/Task';
 	styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit, AfterViewInit {
-	public displayedColumns: string[] = ['color', 'id', 'title', 'date', 'priority', 'category'];
+	public displayedColumns: string[] = ['color', 'id', 'title', 'date', 'priority', 'category', 'operations', 'select'];
 	public dataSource!: MatTableDataSource<Task>;
 
 	//ссылки на компоненты таблицы
@@ -76,6 +77,21 @@ export class TasksComponent implements OnInit, AfterViewInit {
 				return;
 			}
 		});
+	}
+
+	openDeleteTaskDialog(task: Task) {
+		const dialogRef = this.dialog.open(
+			ConfirmDialogComponent,
+			{
+				maxWidth: '500px',
+				data: { dialogTitle: 'Подтвердите действие', message: 'Вы действительно хотите удалить задачу?' },
+				autoFocus: false
+			}
+		);
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) this.deleteTask.emit(task);
+		})
 	}
 
 	public getPriorityColor(task: Task): string {

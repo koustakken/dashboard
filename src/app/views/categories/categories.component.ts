@@ -13,7 +13,8 @@ export class CategoriesComponent implements OnInit {
 	@Output()
 	selectCategory = new EventEmitter<Category>();
 
-	selectedCategory!: Category;
+	@Input()
+	selectedCategory!: Category | null;
 
 	constructor() { }
 

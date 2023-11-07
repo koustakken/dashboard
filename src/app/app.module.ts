@@ -18,13 +18,26 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { TaskDatePipe } from './pipe/task-date.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+// local
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+registerLocaleData(localeRu);
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CategoriesComponent,
 		TasksComponent,
-		EditTaskDialogComponent
+		EditTaskDialogComponent,
+		ConfirmDialogComponent,
+		TaskDatePipe
 	],
 	imports: [
 		BrowserModule,
@@ -37,11 +50,17 @@ import { MatIconModule } from '@angular/material/icon';
 		FormsModule,
 		MatInputModule,
 		MatButtonModule,
-		MatIconModule
+		MatIconModule,
+		MatOptionModule,
+		MatSelectModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
+		MatCheckboxModule
 	],
 	providers: [],
 	entryComponents: [
-		EditTaskDialogComponent
+		EditTaskDialogComponent,
+		ConfirmDialogComponent
 	],
 	bootstrap: [AppComponent]
 })

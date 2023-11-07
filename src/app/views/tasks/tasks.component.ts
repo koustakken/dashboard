@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { EditTaskDialogComponent } from 'src/app/dialog/edit-task-dialog/edit-task-dialog.component';
+import { Category } from 'src/app/model/Category';
 import { Task } from 'src/app/model/Task';
 
 @Component({
@@ -12,7 +14,7 @@ import { Task } from 'src/app/model/Task';
 	styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit, AfterViewInit {
-	public displayedColumns: string[] = ['color', 'id', 'title', 'date', 'priority', 'category'];
+	public displayedColumns: string[] = ['color', 'id', 'title', 'date', 'priority', 'category', 'operations', 'select'];
 	public dataSource!: MatTableDataSource<Task>;
 
 	//ссылки на компоненты таблицы
@@ -26,10 +28,15 @@ export class TasksComponent implements OnInit, AfterViewInit {
 		this.tasks = tasks;
 		this.refreshTable();
 	};
+	@Output()
+	deleteTask = new EventEmitter<Task>();
 
 	@Output()
-	selectTask = new EventEmitter<Task>()
+	selectTask = new EventEmitter<Task>();
 	public tasks!: Task[];
+
+	@Output()
+	selectCategory = new EventEmitter<Category>();
 
 	constructor(private dialog: MatDialog) { }
 
@@ -56,11 +63,43 @@ export class TasksComponent implements OnInit, AfterViewInit {
 			}
 		);
 		dialogRef.afterClosed().subscribe(result => {
+			if (result === 'complete') {
+				task.completed = true;
+				this.selectTask.emit(task);
+			}
+			if (result === 'activate') {
+				task.completed = false;
+				this.selectTask.emit(task);
+				return;
+			}
+			if (result === 'delete') {
+				this.deleteTask.emit(task)
+				return;
+			}
 			if (result as Task) {
 				this.selectTask.emit(task);
 				return;
 			}
 		});
+	}
+
+	openDeleteTaskDialog(task: Task) {
+		const dialogRef = this.dialog.open(
+			ConfirmDialogComponent,
+			{
+				maxWidth: '500px',
+				data: { dialogTitle: 'Подтвердите действие', message: 'Вы действительно хотите удалить задачу?' },
+				autoFocus: false
+			}
+		);
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) this.deleteTask.emit(task);
+		})
+	}
+
+	onSelectCategory(category: Category) {
+		this.selectCategory.emit(category);
 	}
 
 	public getPriorityColor(task: Task): string {

@@ -11,7 +11,8 @@
 	</div>
 	<hr class="horizontal light mt-0 mb-2">
 	<!--Categories-->
-	<app-categories (selectCategory)="onSelectCategory($event)" [categories]="categories"></app-categories>
+	<app-categories (selectCategory)="onSelectCategory($event)" [selectedCategory]="selectedCategory"
+		[categories]="categories"></app-categories>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 	<!-- Navbar -->
@@ -231,7 +232,8 @@
 			</div>
 		</div>
 		<!-- Tasks -->
-		<app-tasks (selectTask)="onSelectTask($event)" [tasks]="tasks"></app-tasks>
+		<app-tasks (selectCategory)="onSelectCategory($event)" (selectTask)="onSelectTask($event)"
+			(deleteTask)="onDeleteTask($event)" [tasks]="tasks"></app-tasks>
 	</div>
 </main>
 <div class="fixed-plugin">

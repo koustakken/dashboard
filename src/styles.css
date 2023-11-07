@@ -14,3 +14,12 @@ body {
 .dialog-task-title {
 	font-size: 25px !important;
 }
+
+.mat-mdc-form-field {
+	width: 100%;
+}
+
+.mat-mdc-dialog-content {
+	width: 500px;
+	padding: 40px !important;
+}

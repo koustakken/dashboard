@@ -8,9 +8,39 @@
 			<mat-icon>clear</mat-icon>
 		</button>
 	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Укажите категорию</mat-label>
+		<mat-select [(ngModel)]="tmpCategory">
+			<mat-option [value]="null">Без категории</mat-option>
+			<mat-option *ngFor="let category of categories" [value]="category">
+				{{category.title}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Укажите приоритет</mat-label>
+		<mat-select [(ngModel)]="tmpPriority">
+			<mat-option [value]="null">Без приоритета</mat-option>
+			<mat-option *ngFor="let prior of priority" [value]="prior">
+				{{prior.title}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Укажите срок выполнения" readonly="true" #inputDate [matDatepicker]="picker"
+			[(ngModel)]="tmpDate" (click)="picker.open()">
+		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+		<mat-datepicker #picker></mat-datepicker>
+		<button *ngIf="inputDate.value.trim().length > 0" mat-button matSuffix mat-icon-button (click)="tmpDate = null">
+			<mat-icon>clear</mat-icon>
+		</button>
+	</mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
 	<button mat-raised-button color="primary" (click)="onConfirm()"
 		[disabled]="inputTitle.value.trim().length==0">Сохранить</button>
 	<button mat-raised-button (click)="onCancel()">Отмена</button>
+	<button mat-button *ngIf="!task.completed" (click)="complete()">Завершить задачу</button>
+	<button mat-button *ngIf="task.completed" (click)="activate()">Активировать задачу</button>
+	<button mat-button color="warn" (click)="delete()">Удалить задачу</button>
 </mat-dialog-actions>

@@ -6,9 +6,14 @@
 			</a>
 		</li>
 		<hr class="horizontal light mt-0 mb-2">
-		<li class="nav-item" *ngFor="let category of categories" (click)="showTasksByCategory(category)">
+		<li class="nav-item" *ngFor="let category of categories; let index = index"
+			(click)="showTasksByCategory(category)" (mouseleave)="showEditIcon(null)"
+			(mouseenter)="showEditIcon(index)">
 			<a class="nav-link text-white" href="#" [class.active]="category == selectedCategory">
 				<span class="nav-link-text ms-1">{{category.title}}</span>
+				<mat-icon *ngIf="indexMouseMove === index" (click)="$event.stopPropagation(); openEditDialog(category)">
+					edit
+				</mat-icon>
 			</a>
 		</li>
 	</ul>

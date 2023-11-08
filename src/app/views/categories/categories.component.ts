@@ -11,7 +11,7 @@ export class CategoriesComponent implements OnInit {
 	categories!: Category[];
 
 	@Output()
-	selectCategory = new EventEmitter<Category>();
+	selectCategory = new EventEmitter<Category | null>();
 
 	@Input()
 	selectedCategory!: Category | null;
@@ -23,10 +23,14 @@ export class CategoriesComponent implements OnInit {
 		console.log('@categories ', this.categories);
 	}
 
-	showTasksByCategory(category: Category) {
-		if (this.selectedCategory === category) return;
-		this.selectedCategory = category;
-		//this.dataHandler.fillTaskByCategory(category);
-		this.selectCategory.emit(this.selectedCategory);
+	showTasksByCategory(category: Category | null) {
+		if (category) {
+			if (this.selectedCategory === category) return;
+			this.selectedCategory = category;
+			//this.dataHandler.fillTaskByCategory(category);
+			this.selectCategory.emit(this.selectedCategory);
+		} else {
+			this.selectCategory.emit(null);
+		}
 	}
 }

@@ -1,1 +1,12 @@
-<p>edit-category-dialog works!</p>
+<mat-dialog-content>
+	<p mat-dialog-title>{{dialogTitle}}</p>
+	<mat-form-field>
+		<mat-label>Название</mat-label>
+		<input #inputTitle matInput [(ngModel)]="categoryTitle" (keydown.enter)="onConfirm()" />
+	</mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+	<button mat-raised-button color="primary" (click)="onConfirm()">Сохранить</button>
+	<button mat-raised-button (click)="onCancel()">Отмена</button>
+	<button mat-button color="warn" (click)="delete()">Удалить</button>
+</mat-dialog-actions>

@@ -12,7 +12,8 @@
 	<hr class="horizontal light mt-0 mb-2">
 	<!--Categories-->
 	<app-categories (selectCategory)="onSelectCategory($event)" [selectedCategory]="selectedCategory"
-		[categories]="categories"></app-categories>
+		[categories]="categories" (updateCategory)="onUpdateCategory($event)"
+		(deleteCategory)="onDeleteCategory($event)"></app-categories>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 	<!-- Navbar -->

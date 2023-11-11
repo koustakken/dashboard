@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoriesComponent } from './views/categories/categories.component';
 import { TasksComponent } from './views/tasks/tasks.component';
 import { EditTaskDialogComponent } from './dialog/edit-task-dialog/edit-task-dialog.component';
+import { EditCategoryDialogComponent } from './dialog/edit-category-dialog/edit-category-dialog.component';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -20,7 +22,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { TaskDatePipe } from './pipe/task-date.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -37,7 +38,8 @@ registerLocaleData(localeRu);
 		TasksComponent,
 		EditTaskDialogComponent,
 		ConfirmDialogComponent,
-		TaskDatePipe
+		TaskDatePipe,
+		EditCategoryDialogComponent
 	],
 	imports: [
 		BrowserModule,
@@ -60,7 +62,8 @@ registerLocaleData(localeRu);
 	providers: [],
 	entryComponents: [
 		EditTaskDialogComponent,
-		ConfirmDialogComponent
+		ConfirmDialogComponent,
+		EditCategoryDialogComponent
 	],
 	bootstrap: [AppComponent]
 })

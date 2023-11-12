@@ -1,3 +1,20 @@
 .completed {
 	text-decoration: line-through;
 }
+
+.filter {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	padding: 1rem;
+}
+
+.filter-inp {
+	display: flex;
+	gap: 1rem;
+}
+
+.filter-btn {
+	display: flex;
+	gap: 1rem;
+}

@@ -24486,10 +24486,6 @@ body:not(.dark-version) .sidenav.bg-transparent .collapse .nav-item .nav-link.ac
 	color: #344767 !important;
 }
 
-.sidenav-header {
-	height: 4.875rem;
-}
-
 .sidenav-footer .card.card-background:after {
 	opacity: 0.65;
 }

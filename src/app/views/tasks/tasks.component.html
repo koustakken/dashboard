@@ -6,6 +6,31 @@
 					<h6 class="text-white text-capitalize ps-3">Задачи</h6>
 				</div>
 			</div>
+			<div class="filter">
+				<div class="filter-inp">
+					<mat-form-field>
+						<input #filterInput matInput placeholder="Поиск в текущей категории">
+					</mat-form-field>
+					<mat-form-field>
+						<mat-select #statusFilter placeholder="Фильтр по статусу">
+							<mat-option>Все статусы</mat-option>
+							<mat-option>Завершенные задачи</mat-option>
+							<mat-option>Незавершенные задачи</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-select #priorityFilter placeholder="Фильтр по приоритету">
+							<mat-option>Все приоритеты</mat-option>
+							<mat-option>1</mat-option>
+							<mat-option>2</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="filter-btn">
+					<button mat-button>Сбросить фильтр</button>
+					<button mat-raised-button color="primary">Добавить</button>
+				</div>
+			</div>
 			<div class="card-body px-0 pb-2">
 				<div class="table-responsive p-0">
 					<table [dataSource]="dataSource" mat-table matSort>
